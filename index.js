@@ -39,9 +39,13 @@ mongoose
   .then((data) => {
     //return Recipe.findOneAndUpdate({title: Rigatoni alla Genovese}, {duration: 100})})
     console.log("Inserted many");
-    return Recipe.findByIdAndUpdate("60786d267f3f69217a2bda12", {
-      duration: 100,
+    data.forEach(elem => {
+      console.log(elem.title);
     });
+    return Recipe.findOneAndUpdate(
+      { title: "Rigatoni alla Genovese" },
+      { duration: 100 }
+    );
   })
 
   .then((data) => {
@@ -50,7 +54,7 @@ mongoose
   })
   .then((data) => {
     console.log("Deletion completed");
-    mongoose.connection
+    return mongoose.connection
       .close()
       .then(() => {
         console.log("Closed");
@@ -63,6 +67,3 @@ mongoose
   .catch((error) => {
     console.error("Error connecting to the database", error);
   });
-
-/*
- */
